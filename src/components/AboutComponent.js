@@ -8,6 +8,7 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./LoadingComponent";
 //import src from "*.bmp";
 
 function RenderPartner({ partner }) {
@@ -16,27 +17,16 @@ function RenderPartner({ partner }) {
       <React.Fragment>
         <Media object src={partner.img} alt={partner.name} width="150" />
         <Media body className="ml-5 mb-4">
-            <Media heading>
-                {partner.name}
-            </Media>
-                {partner.description}
+          <Media heading>{partner.name}</Media>
+          {partner.description}
         </Media>
       </React.Fragment>
-    );   
+    );
   }
-  return <div></div>
+  return <div></div>;
 }
 
 function About(props) {
-  const partners = props.partners.map((partner) => {
-    return(
-      <Media tag = "li" key= {partner.id}>
-        <RenderPartner partner={partner}/>
-
-      </Media>
-    );
-  });
-
   return (
     <div className="container">
       <div className="row">
@@ -106,12 +96,37 @@ function About(props) {
         <div className="col-12">
           <h3>Community Partners</h3>
         </div>
-        <div className="col mt-4">
-          <Media list>{partners}</Media>
-        </div>
+          <PartnerList/>
       </div>
     </div>
   );
+}
+
+function PartnerList(props) {
+  console.log(props)
+  
+  const partners = props.partners.partners.map((partner) => {
+    return (
+      <Media tag="li" key={partner.id}>
+        <RenderPartner partner={partner} />
+      </Media>
+    );
+  });
+  if (props.partnersLoading) return (<Loading />);
+if (props.errMess) {
+  return (
+    <div className="col">
+      <h4>{props.errMess}</h4>
+    </div>
+  );
+  return(
+    <div className="col mt-4">
+          <Media list>
+            {partners}
+            </Media>
+        </div>
+  )
+}
 }
 
 export default About;
