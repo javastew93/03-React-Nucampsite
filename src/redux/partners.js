@@ -1,11 +1,12 @@
 import * as ActionTypes from "./ActionTypes";
 
 export const Partners = (
-  state = { isloading: true, errMess: null, partners: [] },
+  state = { isLoading: true, errMess: null, partners: [] },
   action
 ) => {
   switch (action.type) {
     case ActionTypes.ADD_PARTNERS:
+      console.log(action);
       return {
         ...state,
         isLoading: false,

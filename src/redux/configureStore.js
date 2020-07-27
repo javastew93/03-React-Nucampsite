@@ -22,7 +22,7 @@ export const ConfigureStore = () => {
             })
 
         }),
-        applyMiddleware(thunk,logger)
+        applyMiddleware(thunk)
     );
 
     return store;

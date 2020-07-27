@@ -96,15 +96,15 @@ function About(props) {
         <div className="col-12">
           <h3>Community Partners</h3>
         </div>
-          <PartnerList/>
+        <PartnerList partners={props.partners}/>
       </div>
     </div>
   );
 }
 
 function PartnerList(props) {
-  console.log(props)
-  
+  console.log(props);
+
   const partners = props.partners.partners.map((partner) => {
     return (
       <Media tag="li" key={partner.id}>
@@ -112,21 +112,19 @@ function PartnerList(props) {
       </Media>
     );
   });
-  if (props.partnersLoading) return (<Loading />);
-if (props.errMess) {
+  if (props.partnersLoading) return <Loading />;
+  if (props.errMess) {
+    return (
+      <div className="col">
+        <h4>{props.errMess}</h4>
+      </div>
+    );
+  }
   return (
-    <div className="col">
-      <h4>{props.errMess}</h4>
+    <div className="col mt-4">
+      <Media list>{partners}</Media>
     </div>
   );
-  return(
-    <div className="col mt-4">
-          <Media list>
-            {partners}
-            </Media>
-        </div>
-  )
-}
 }
 
 export default About;
